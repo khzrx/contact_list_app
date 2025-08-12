@@ -1,6 +1,5 @@
-from selene import browser
+from selene import browser, have
 import allure
-
 from contact_list_app.pages.contact_list_page import contact_list_page
 
 
@@ -12,6 +11,7 @@ class RegistrationPage:
         self.password_input = browser.element('#password')
         self.submit_button = browser.element('#submit')
         self.cancel_button = browser.element('#cancel')
+        self.error = browser.element('#error')
 
     @allure.step('Открыть страницу регистрации.')
     def open(self):
@@ -43,5 +43,8 @@ class RegistrationPage:
         self.submit_button.click()
         return contact_list_page
 
+    @allure.step('Проверить текст ошибки валидации.')
+    def check_validation_error_text(self, error_text: str):
+        self.error.should(have.exact_text(error_text))
 
 registration_page = RegistrationPage()
