@@ -1,8 +1,6 @@
 import os
-
 import allure
 from selene import browser, have
-
 from contact_list_app.pages.registration_page import registration_page
 
 
@@ -38,6 +36,12 @@ class LoginPage:
     def click_submit_button(self):
         self.submit_button.click()
         return registration_page
+
+    @allure.step('Авторизоваться на сайте.')
+    def login(self):
+        self.type_email()
+        self.type_password()
+        self.click_submit_button()
 
     @allure.step('Проверить текст ошибки валидации.')
     def check_validation_error_text(self, error_text: str):

@@ -1,8 +1,10 @@
 import allure
 import pytest
 from selene.support.shared import browser
+from contact_list_app.models.contact import RandomContact
 from contact_list_app.models.user import RandomUser
 from contact_list_app.utils import attach
+
 
 @allure.title('Инициализация браузера.')
 @pytest.fixture(scope='function', autouse=True)
@@ -19,10 +21,14 @@ def manage_browser(request):
 
     browser.quit()
 
-
 @allure.title('Генерация рандомного пользователя.')
 @pytest.fixture
 def random_user():
     user = RandomUser()
-    with allure.step(user.__repr__()):
-        yield user
+    yield user
+
+@allure.title('Генерация рандомного контакта.')
+@pytest.fixture
+def random_contact():
+    contact = RandomContact()
+    yield contact
