@@ -6,11 +6,11 @@ fake = Faker()
 
 @dataclass
 class RandomUser:
-    first_name: str = fake.first_name()
-    last_name: str = fake.last_name()
-    email: str = f'{first_name}.{last_name}@{fake.domain_name()}'.lower()
+    first_name: str = field(default_factory=fake.first_name)
+    last_name: str = field(default_factory=fake.last_name)
+    email: str = field(init=False)
     password: str = field(
-        default=fake.password(
+        default_factory=lambda: fake.password(
             length=12,
             special_chars=True,
             digits=True,
@@ -18,3 +18,6 @@ class RandomUser:
             lower_case=True
         ),
         repr=False)
+
+    def __post_init__(self):
+        self.email = f'{self.first_name}.{self.last_name}@{fake.domain_name()}'.lower()

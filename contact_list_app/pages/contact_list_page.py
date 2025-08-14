@@ -58,6 +58,14 @@ class ContactListPage:
 
         self.created_contact_fields = self.created_contact.all('td')
 
+    @allure.step('Проверить отсутствие контакта в таблице.')
+    def check_contact_is_not_in_list(self, contact: RandomContact):
+        browser.element(
+            by.xpath(
+                f'//tr[@class="contactTableBodyRow"][.//td[text()="{contact.first_name} {contact.last_name}"]]'
+            )
+        ).should(be.not_.present)
+
     @allure.step('Проверить данные созданного контакта в таблице.')
     def verify_contact_data(self, contact: RandomContact):
         self.verify_contact_name(contact.first_name, contact.last_name)

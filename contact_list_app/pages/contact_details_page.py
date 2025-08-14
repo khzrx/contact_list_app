@@ -80,11 +80,19 @@ class ContactDetailsPage:
         self.verify_contact_country(contact.country)
         attach.screenshot()
 
-    @allure.step('Удалить созданный контакт')
+    @allure.step('Удалить созданный контакт.')
     def delete_contact(self):
         self.delete_contact_button.click()
         browser.wait_until(EC.alert_is_present())
         browser.driver.switch_to.alert.accept()
+
+    @allure.step('Кликнуть на кнопку "Edit Contact".')
+    def click_edit_contact_button(self):
+        self.edit_contact_button.click()
+
+    @allure.step('Кликнуть на кнопку "Return to Contact List".')
+    def click_return_to_contact_list_button(self):
+        self.return_to_contact_list_button.click()
 
 
 contact_details_page = ContactDetailsPage()
