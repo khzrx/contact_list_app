@@ -88,7 +88,7 @@ class TestContactEditing:
 
 
     @allure.title('Изменение данных контакта, не заполнены обязательные поля.')
-    @allure.severity(Severity.NORMAL)
+    @allure.severity(Severity.MINOR)
     @allure.tag('UI', 'Контакты')
     @allure.label('owner', 'fdgoncharenko')
     def test_edit_contact_required_fields_not_filled(self, random_contact):
@@ -109,3 +109,29 @@ class TestContactEditing:
 
         edit_contact_page.click_cancel_button()
         contact_details_page.delete_contact()
+
+
+@allure.parent_suite('UI')
+@allure.suite('Добавление, изменение, удаление контактов.')
+@allure.sub_suite('Удаление контакта.')
+@allure.epic('Добавление, изменение, удаление контактов.')
+@allure.feature('Удаление контакта.')
+@allure.story('Пользователь должен иметь возможность удалить добавленный контакт.')
+class TestContactDeleting:
+
+    @allure.title('Успешное удаление контакта.')
+    @allure.severity(Severity.NORMAL)
+    @allure.tag('UI', 'Контакты')
+    @allure.label('owner', 'fdgoncharenko')
+    def test_delete_contact_successful(self, random_contact):
+        login_page.open()
+        login_page.login()
+        contact_list_page.click_add_new_contact_button()
+        add_contact_page.fill_contact_data(random_contact)
+        add_contact_page.click_submit_button()
+        contact_list_page.check_contact_was_created(random_contact)
+        contact_list_page.click_on_created_contact()
+
+        contact_details_page.delete_contact()
+
+        contact_list_page.check_contact_is_not_in_list(random_contact)
