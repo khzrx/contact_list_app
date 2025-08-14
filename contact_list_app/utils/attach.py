@@ -1,5 +1,8 @@
 import allure
+from curlify import to_curl
+from requests import Response
 from selene import browser
+import json
 
 
 def screenshot():
@@ -34,4 +37,28 @@ def logs():
         name='browser_logs',
         attachment_type=allure.attachment_type.HTML,
         extension='.log'
+    )
+
+def request_curl(curl):
+    allure.attach(
+        body=curl,
+        name=curl,
+        attachment_type=allure.attachment_type.TEXT,
+        extension='.txt'
+    )
+
+def json_file(response):
+    allure.attach(
+        body=json.dumps(response.json(), indent=4),
+        name='response',
+        attachment_type=allure.attachment_type.JSON,
+        extension='json'
+    )
+
+def response_text(text):
+    allure.attach(
+        body=text,
+        name='response',
+        attachment_type=allure.attachment_type.TEXT,
+        extension='.txt'
     )
