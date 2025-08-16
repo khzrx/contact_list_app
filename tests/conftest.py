@@ -43,7 +43,7 @@ def auth_token(request):
 
 @allure.title('Удаление созданных контактов после выполнения теста.')
 @pytest.fixture(scope='function')
-def delete_contacts_after_test(auth_token):
+def delete_contacts_td(auth_token):
     yield
 
     contacts_list = requests.get(

@@ -28,3 +28,49 @@ def verify_contact_is_in_list(response: requests.Response, token: str):
 @allure.step('Проверка текста ошибки в ответе.')
 def verify_error_message_in_response(response: requests.Response, error_message: str):
     assert response.json()['message'] == error_message
+
+@allure.step('Добавление контакта через API.')
+def add_contact(contact: RandomContact, token: str):
+    payload = contact.as_dict()
+
+    response = request.send_request(
+        method='POST',
+        endpoint='/contacts',
+        json=payload,
+        headers={'Authorization': f'Bearer {token}'}
+    )
+
+    return response
+
+@allure.step('Изменение данных контакта через API по id.')
+def edit_contact(contact_id: str, new_contact: RandomContact, token: str):
+    payload = new_contact.as_dict()
+
+    response = request.send_request(
+        method='PUT',
+        endpoint=f'/contacts/{contact_id}',
+        json=payload,
+        headers={'Authorization': f'Bearer {token}'}
+    )
+
+    return response
+
+@allure.step('Получение данных контакта через API по id.')
+def get_contact_by_id(contact_id: str, token: str):
+    response = request.send_request(
+        method='GET',
+        endpoint=f'/contacts/{contact_id}',
+        headers={'Authorization': f'Bearer {token}'}
+    )
+
+    return response
+
+@allure.step('Удаление контакта через API по id.')
+def delete_contact(contact_id: str, token: str):
+    response = request.send_request(
+        method='DELETE',
+        endpoint=f'/contacts/{contact_id}',
+        headers={'Authorization': f'Bearer {token}'}
+    )
+
+    return response

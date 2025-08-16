@@ -25,7 +25,7 @@ class TestContactAdding:
     @allure.severity(Severity.CRITICAL)
     @allure.tag('UI', 'Контакты')
     @allure.label('owner', 'fdgoncharenko')
-    def test_add_contact_successful(self, random_contact, delete_contacts_after_test):
+    def test_add_contact_successful(self, random_contact, delete_contacts_td):
         login_page.open()
         login_page.login()
 
@@ -65,7 +65,7 @@ class TestContactEditing:
     @allure.severity(Severity.NORMAL)
     @allure.tag('UI', 'Контакты')
     @allure.label('owner', 'fdgoncharenko')
-    def test_edit_contact_successful(self, random_contact, delete_contacts_after_test):
+    def test_edit_contact_successful(self, random_contact, delete_contacts_td):
         new_contact = RandomContact()
         login_page.open()
         login_page.login()
