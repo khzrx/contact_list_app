@@ -1,4 +1,5 @@
 import allure
+import pytest
 from allure_commons.types import Severity
 from contact_list_app.pages.login_page import login_page
 from contact_list_app.pages.contact_list_page import contact_list_page
@@ -13,6 +14,7 @@ validation_texts = validation.AuthorizationValidationTexts()
 @allure.epic('Регистрация и авторизация')
 @allure.feature('Авторизация пользователя')
 @allure.story('Пользователь должен иметь возможность авторизоваться на сайте')
+@pytest.mark.ui
 class TestAuthorization:
 
     @allure.title('Успешная авторизация пользователя.')

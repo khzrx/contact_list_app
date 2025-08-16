@@ -20,3 +20,18 @@ class RandomContact:
 
     def __post_init__(self):
         self.email = f'{self.first_name}.{self.last_name}@{fake.domain_name()}'.lower()
+
+    def as_dict(self):
+        return {
+            'firstName': self.first_name,
+            'lastName': self.last_name,
+            'birthdate': self.birthdate,
+            'email': self.email,
+            'phone': self.phone,
+            'street1': self.street_address_1,
+            'street2': self.street_address_2,
+            'city': self.city,
+            'stateProvince': self.state,
+            'postalCode': self.postal_code,
+            'country': self.country
+        }

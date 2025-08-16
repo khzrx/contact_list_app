@@ -21,3 +21,11 @@ class RandomUser:
 
     def __post_init__(self):
         self.email = f'{self.first_name}.{self.last_name}@{fake.domain_name()}'.lower()
+
+    def as_dict(self):
+        return {
+            'firstName': self.first_name,
+            'lastName': self.last_name,
+            'email': self.email,
+            'password': self.password
+        }

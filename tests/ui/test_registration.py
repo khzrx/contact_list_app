@@ -1,4 +1,5 @@
 import allure
+import pytest
 from allure_commons.types import Severity
 from contact_list_app.pages.login_page import login_page
 from contact_list_app.pages.registration_page import registration_page
@@ -14,6 +15,7 @@ validation_texts = validation.RegistrationValidationTexts()
 @allure.epic('Регистрация и авторизация')
 @allure.feature('Регистрация пользователя')
 @allure.story('Пользователь должен иметь возможность зарегистрироваться на сайте')
+@pytest.mark.ui
 class TestRegistration:
 
     @allure.title('Успешная регистрация пользователя.')
