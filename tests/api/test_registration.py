@@ -1,7 +1,7 @@
 import allure
 import pytest
 from allure_commons.types import Severity
-from contact_list_app.utils import request
+from contact_list_app.utils import request, api_helper
 from contact_list_app.utils.schema import validate_schema
 from contact_list_app.models.validation import RegistrationValidationTexts
 
@@ -66,7 +66,5 @@ class TestRegistration:
         request.response_attaching(response)
 
         request.verify_status_code(response, 400)
-
-        with allure.step('Проверка текста ошибки в ответе.'):
-            assert response.json()['message'] == validation_texts.required_fields
+        api_helper.verify_error_message_in_response(response, validation_texts.required_fields)
 

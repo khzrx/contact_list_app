@@ -1,0 +1,128 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "errors": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            },
+            "properties": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "message",
+                "type",
+                "path",
+                "value"
+              ]
+            },
+            "kind": {
+              "type": "string"
+            },
+            "path": {
+              "type": "string"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "message",
+            "properties",
+            "kind",
+            "path",
+            "value"
+          ]
+        },
+        "lastName": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            },
+            "properties": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "message",
+                "type",
+                "path",
+                "value"
+              ]
+            },
+            "kind": {
+              "type": "string"
+            },
+            "path": {
+              "type": "string"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "message",
+            "properties",
+            "kind",
+            "path",
+            "value"
+          ]
+        }
+      },
+      "required": [
+        "firstName",
+        "lastName"
+      ]
+    },
+    "_message": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "errors",
+    "_message",
+    "message"
+  ]
+}

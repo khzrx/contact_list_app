@@ -24,3 +24,7 @@ def verify_contact_is_in_list(response: requests.Response, token: str):
     )
 
     assert created_contact_data in get_contacts_response.json()
+
+@allure.step('Проверка текста ошибки в ответе.')
+def verify_error_message_in_response(response: requests.Response, error_message: str):
+    assert response.json()['message'] == error_message
