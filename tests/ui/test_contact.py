@@ -25,7 +25,7 @@ class TestContactAdding:
     @allure.severity(Severity.CRITICAL)
     @allure.tag('UI', 'Контакты')
     @allure.label('owner', 'fdgoncharenko')
-    def test_add_contact_successful(self, random_contact):
+    def test_add_contact_successful(self, random_contact, delete_contacts_after_test):
         login_page.open()
         login_page.login()
 
@@ -37,8 +37,6 @@ class TestContactAdding:
         contact_list_page.verify_contact_data(random_contact)
         contact_list_page.click_on_created_contact()
         contact_details_page.verify_contact_data(random_contact)
-
-        contact_details_page.delete_contact()
 
     @allure.title('Добавление контакта, не заполнены обязательные поля.')
     @allure.severity(Severity.NORMAL)
@@ -67,7 +65,7 @@ class TestContactEditing:
     @allure.severity(Severity.NORMAL)
     @allure.tag('UI', 'Контакты')
     @allure.label('owner', 'fdgoncharenko')
-    def test_edit_contact_successful(self, random_contact):
+    def test_edit_contact_successful(self, random_contact, delete_contacts_after_test):
         new_contact = RandomContact()
         login_page.open()
         login_page.login()
@@ -85,10 +83,6 @@ class TestContactEditing:
         contact_list_page.check_contact_is_not_in_list(random_contact)
         contact_list_page.check_contact_was_created(new_contact)
         contact_list_page.verify_contact_data(new_contact)
-
-        contact_list_page.click_on_created_contact()
-        contact_details_page.delete_contact()
-
 
     @allure.title('Изменение данных контакта, не заполнены обязательные поля.')
     @allure.severity(Severity.MINOR)
