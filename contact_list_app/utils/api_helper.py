@@ -1,7 +1,7 @@
 import allure
 import requests
 from contact_list_app.models.contact import RandomContact
-from contact_list_app.utils import request
+from contact_list_app.utils import request, attach
 
 
 @allure.step('Проверка соответствия данных созданного контакта в ответе запроса.')
@@ -40,6 +40,7 @@ def add_contact(contact: RandomContact, token: str):
         headers={'Authorization': f'Bearer {token}'}
     )
 
+    attach.json_file(response)
     return response
 
 @allure.step('Изменение данных контакта через API по id.')

@@ -1,6 +1,5 @@
+import os
 import allure
-from curlify import to_curl
-from requests import Response
 from selene import browser
 import json
 
@@ -61,4 +60,18 @@ def response_text(text):
         name='response',
         attachment_type=allure.attachment_type.TEXT,
         extension='.txt'
+    )
+
+def add_video(browser):
+    selenoid_url = os.getenv('SELENOID_URL')
+    video_url = f'https://{selenoid_url}/video/' + browser.driver.session_id + '.mp4'
+    video_html = "<html><body><video width='100%' height='100%' controls autoplay><source src='" \
+           + video_url \
+           + "' type='video/mp4'></video></body></html>"
+
+    allure.attach(
+        body=video_html,
+        name='video_' + browser.driver.session_id,
+        attachment_type= allure.attachment_type.HTML,
+        extension='.html'
     )

@@ -7,9 +7,15 @@ from contact_list_app.models.contact import RandomContact
 from contact_list_app.models.user import RandomUser
 
 
+def pytest_addoption(parser):
+    parser.addoption(
+        '--remote',
+        action='store_true',
+        help='Run tests remotely on Selenoid'
+    )
+
 def pytest_configure():
     load_dotenv()
-
 
 @allure.title('Генерация рандомного пользователя.')
 @pytest.fixture
