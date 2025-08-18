@@ -6,6 +6,7 @@ from contact_list_app.utils import attach
 
 class AddContactPage:
     def __init__(self):
+        self.endpoint = '/addContact'
         self.first_name_input = browser.element('#firstName')
         self.last_name_input = browser.element('#lastName')
         self.birthdate_input = browser.element('#birthdate')
@@ -22,7 +23,7 @@ class AddContactPage:
 
     @allure.step('Открыть страницу добавления контакта.')
     def open(self):
-        browser.open('/addContact')
+        browser.open(self.endpoint)
         return self
 
     @allure.step('Ввести значение в поле "First Name".')

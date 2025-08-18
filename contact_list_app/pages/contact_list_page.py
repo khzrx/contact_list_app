@@ -5,11 +5,16 @@ from contact_list_app.models.contact import RandomContact
 
 class ContactListPage:
     def __init__(self):
+        self.endpoint = '/contactList'
         self.logout_button = browser.element('#logout')
         self.add_contact_button = browser.element('#add-contact')
         self.contacts = browser.all('.contactTableBodyRow')
         self.created_contact = None
         self.created_contact_fields = None
+
+    @allure.step('Открыть страницу "Contact List".')
+    def open(self):
+        browser.open(self.endpoint)
 
     @allure.step('Проверить видимость кнопки "Logout".')
     def logout_button_should_be_clickable(self):

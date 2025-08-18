@@ -20,7 +20,7 @@ class TestRegistration:
 
     @allure.title('Успешная регистрация пользователя.')
     @allure.severity(Severity.CRITICAL)
-    @allure.tag('UI', 'Регистрация')
+    @allure.tag('Регистрация')
     @allure.label('owner', 'fdgoncharenko')
     def test_register_user_successful(self, random_user):
         login_page.open()
@@ -36,7 +36,7 @@ class TestRegistration:
 
     @allure.title('Регистрация пользователя, не заполнены обязательные поля.')
     @allure.severity(Severity.NORMAL)
-    @allure.tag('UI', 'Регистрация', 'Валидация')
+    @allure.tag('Регистрация', 'Валидация')
     @allure.label('owner', 'fdgoncharenko')
     def test_register_user_required_fields_not_filled(self):
         registration_page.open()
@@ -47,7 +47,7 @@ class TestRegistration:
 
     @allure.title('Регистрация пользователя, email уже зарегистрирован.')
     @allure.severity(Severity.NORMAL)
-    @allure.tag('UI', 'Регистрация', 'Валидация')
+    @allure.tag('Регистрация', 'Валидация')
     @allure.label('owner', 'fdgoncharenko')
     def test_register_user_email_in_use(self, random_user):
         registration_page.open()

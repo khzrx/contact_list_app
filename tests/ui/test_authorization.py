@@ -19,7 +19,7 @@ class TestAuthorization:
 
     @allure.title('Успешная авторизация пользователя.')
     @allure.severity(Severity.CRITICAL)
-    @allure.tag('UI', 'Авторизация')
+    @allure.tag('Авторизация')
     @allure.label('owner', 'fdgoncharenko')
     def test_authorization_user_successful(self):
         login_page.open()
@@ -32,7 +32,7 @@ class TestAuthorization:
 
     @allure.title('Авторизация пользователя, некорректные email/password.')
     @allure.severity(Severity.CRITICAL)
-    @allure.tag('UI', 'Авторизация', 'Валидация')
+    @allure.tag('Авторизация', 'Валидация')
     @allure.label('owner', 'fdgoncharenko')
     def test_authorization_user_incorrect_email_or_password(self):
         login_page.open()

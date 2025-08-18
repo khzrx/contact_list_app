@@ -1,16 +1,23 @@
 import allure
 import pytest
 from allure_commons.types import Severity
+from selene import browser
 from contact_list_app.pages.contact_list_page import contact_list_page
 from contact_list_app.pages.add_contact_page import add_contact_page
-from contact_list_app.pages.login_page import login_page
 from contact_list_app.pages.contact_details_page import contact_details_page
 from contact_list_app.pages.edit_contact_page import edit_contact_page
 from contact_list_app.models.contact import RandomContact
 from contact_list_app.models import validation
+from contact_list_app.utils import api_helper
 
 add_contact_validation_texts = validation.AddContactValidationTexts()
 edit_contact_validation_texts = validation.EditContactValidationTexts()
+
+@allure.step('Добавление авторизационного токена в cookie.')
+def add_auth_token_to_browser_cookies(auth_token):
+       browser.open('/')
+       browser.driver.add_cookie({'name': 'token', 'value': auth_token})
+
 
 @allure.parent_suite('UI')
 @allure.suite('Добавление, изменение, удаление контактов.')
@@ -23,11 +30,11 @@ class TestContactAdding:
 
     @allure.title('Успешное добавление контакта, заполнены все данные.')
     @allure.severity(Severity.CRITICAL)
-    @allure.tag('UI', 'Контакты')
+    @allure.tag('Контакты')
     @allure.label('owner', 'fdgoncharenko')
-    def test_add_contact_successful(self, random_contact, delete_contacts_td):
-        login_page.open()
-        login_page.login()
+    def test_add_contact_successful(self, random_contact, auth_token, delete_contacts_td):
+        add_auth_token_to_browser_cookies(auth_token)
+        contact_list_page.open()
 
         contact_list_page.click_add_new_contact_button()
         add_contact_page.fill_contact_data(random_contact)
@@ -40,13 +47,12 @@ class TestContactAdding:
 
     @allure.title('Добавление контакта, не заполнены обязательные поля.')
     @allure.severity(Severity.NORMAL)
-    @allure.tag('UI', 'Контакты')
+    @allure.tag('Контакты', 'Валидация')
     @allure.label('owner', 'fdgoncharenko')
-    def test_add_contact_required_fields_not_filled(self):
-        login_page.open()
-        login_page.login()
+    def test_add_contact_required_fields_not_filled(self, auth_token):
+        add_auth_token_to_browser_cookies(auth_token)
+        add_contact_page.open()
 
-        contact_list_page.click_add_new_contact_button()
         add_contact_page.click_submit_button()
 
         add_contact_page.check_validation_error_text(add_contact_validation_texts.required_fields)
@@ -63,15 +69,13 @@ class TestContactEditing:
 
     @allure.title('Успешное изменение всех данных контакта.')
     @allure.severity(Severity.NORMAL)
-    @allure.tag('UI', 'Контакты')
+    @allure.tag('Контакты')
     @allure.label('owner', 'fdgoncharenko')
-    def test_edit_contact_successful(self, random_contact, delete_contacts_td):
+    def test_edit_contact_successful(self, random_contact, auth_token, delete_contacts_td):
         new_contact = RandomContact()
-        login_page.open()
-        login_page.login()
-        contact_list_page.click_add_new_contact_button()
-        add_contact_page.fill_contact_data(random_contact)
-        add_contact_page.click_submit_button()
+        api_helper.add_contact(random_contact, auth_token)
+        add_auth_token_to_browser_cookies(auth_token)
+        contact_list_page.open()
         contact_list_page.check_contact_was_created(random_contact)
         contact_list_page.click_on_created_contact()
 
@@ -86,14 +90,12 @@ class TestContactEditing:
 
     @allure.title('Изменение данных контакта, не заполнены обязательные поля.')
     @allure.severity(Severity.MINOR)
-    @allure.tag('UI', 'Контакты')
+    @allure.tag('Контакты', 'Валидация')
     @allure.label('owner', 'fdgoncharenko')
-    def test_edit_contact_required_fields_not_filled(self, random_contact):
-        login_page.open()
-        login_page.login()
-        contact_list_page.click_add_new_contact_button()
-        add_contact_page.fill_contact_data(random_contact)
-        add_contact_page.click_submit_button()
+    def test_edit_contact_required_fields_not_filled(self, random_contact, auth_token):
+        api_helper.add_contact(random_contact, auth_token)
+        add_auth_token_to_browser_cookies(auth_token)
+        contact_list_page.open()
         contact_list_page.check_contact_was_created(random_contact)
         contact_list_page.click_on_created_contact()
 
@@ -119,14 +121,12 @@ class TestContactDeleting:
 
     @allure.title('Успешное удаление контакта.')
     @allure.severity(Severity.NORMAL)
-    @allure.tag('UI', 'Контакты')
+    @allure.tag('Контакты')
     @allure.label('owner', 'fdgoncharenko')
-    def test_delete_contact_successful(self, random_contact):
-        login_page.open()
-        login_page.login()
-        contact_list_page.click_add_new_contact_button()
-        add_contact_page.fill_contact_data(random_contact)
-        add_contact_page.click_submit_button()
+    def test_delete_contact_successful(self, random_contact, auth_token):
+        api_helper.add_contact(random_contact, auth_token)
+        add_auth_token_to_browser_cookies(auth_token)
+        contact_list_page.open()
         contact_list_page.check_contact_was_created(random_contact)
         contact_list_page.click_on_created_contact()
 
