@@ -3,15 +3,7 @@
 > <a target="_blank" href="https://thinking-tester-contact-list.herokuapp.com/">Ссылка на сайт</a>
 ----
 ### Проект реализован с использованием:
-<img src="resources/python-original.svg" width="50">
-<img src="resources/pytest-original.svg" width="50">
-<img src="resources/selenium-original.svg" width="50">
-<img src="resources/selene.png" width="50">
-<img src="resources/jenkins-original.svg" width="50">
-<img src="resources/selenoid.png" width="50">
-<img src="resources/allure_report.png" width="50">
-<img src="resources/allure-test-ops.png" width="50">
-<img src="resources/tg.png" width="50">
+<img src="resources/python-original.svg" width="50"><img src="resources/pytest-original.svg" width="50"><img src="resources/selenium-original.svg" width="50"><img src="resources/selene.png" width="50"><img src="resources/jenkins-original.svg" width="50"><img src="resources/selenoid.png" width="50"><img src="resources/allure_report.png" width="50"><img src="resources/allure-test-ops.png" width="50"><img src="resources/tg.png" width="50">
 
 ----
 
@@ -64,9 +56,9 @@ pytest .
 ----
 
 ### Удаленный запуск автотестов выполняется в Jenkins или в Allure TestOps
-> <a target="_blank" href="https://jenkins.autotests.cloud/job/20_goncharenko_filipp_contact_list_demo/">Ссылка на проект в Jenkins</a>
+> <a href="https://jenkins.autotests.cloud/job/20_goncharenko_filipp_contact_list_demo/">Ссылка на проект в Jenkins</a>
 
-> <a target="_blank" href="https://allure.autotests.cloud/project/4886/dashboards/">Ссылка на проект в Allure TestOps</a>
+> <a href="https://allure.autotests.cloud/project/4886/dashboards/">Ссылка на проект в Allure TestOps</a>
 
 #### Для запуска автотестов в Jenkins
 
